@@ -37,10 +37,16 @@ class View:
 
         # --- Sezione 2: Filtraggio ---
         # TODO
-
+        self.tendina_biblioteche_sezione_2 = ft.Dropdown(label='Biblioteche')
+        self.tendina_generi_sezione_2 = ft.Dropdown(label='Generi')
+        self.riga_sezione_2 = ft.Row(spacing= 120, controls=[self.tendina_biblioteche_sezione_2, self.tendina_generi_sezione_2], alignment=ft.MainAxisAlignment.CENTER)
         # Sezione 3: Libri
         # TODO
+        self.bottone_mostra_sezione_3=ft.Button(content='Mostra') #aggiungere funzione on_click
+        self.contenitore_libri_sezione_3=ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
 
+        self.riga_prima_sezione_3=ft.Row(spacing=80, controls=[self.bottone_mostra_sezione_3], alignment=ft.MainAxisAlignment.CENTER)
+        self.riga_seconda_sezione_3=ft.Row(controls=[self.contenitore_libri_sezione_3], alignment=ft.MainAxisAlignment.CENTER)
         # --- Toggle Tema ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
 
@@ -54,9 +60,12 @@ class View:
 
             # Sezione 2: Filtraggio
             # TODO
-
+            self.riga_sezione_2,
+            ft.Divider(),
             # Sezione 3: Libri
             # TODO
+            self.riga_prima_sezione_3,
+            self.riga_seconda_sezione_3,
         )
 
         self.page.scroll = "adaptive"
