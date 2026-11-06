@@ -26,7 +26,6 @@ class LibroDAO:
         for g in cursor:
             libro = Libro(*g)
             lista_risultato_libri.append(libro)
-
         cursor.close()
         cnx.close()
 
