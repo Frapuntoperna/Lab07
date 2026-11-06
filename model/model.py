@@ -17,12 +17,53 @@ class Model:
     def get_libri_filtrati(self, biblioteca:str, genere:str):
         """Restituisce la lista di tutti i libri filtrati per biblioteca e/o genere (filtri opzionali)."""
         # TODO
+        #IL PROBLEMA è QUA, CE DA CAPIRE BENE QUALE DELLE 3 LISTE DERIVANTI DAI DAO DEVE PASSARE NEL CONTROLLER PER ESSERE
+        #STAMPATA
+        libri_filtrati_biblioteca=self._biblioteca_dao.get_libri_filtro_biblioteca(biblioteca)
+        libri_filtrati_biblioteca_e_genere=self._biblioteca_dao.get_libri_filtro_biblioteca_e_genere(biblioteca, genere)
+        libri_filtrati_genere=self._libro_dao.get_libri_filtro_genere(genere)
+
+        lista_libri_da_mostrare=[]
+
+        if libri_filtrati_biblioteca !=[]:
+            lista_libri_da_mostrare=libri_filtrati_biblioteca
+
+        elif libri_filtrati_genere !=[]:
+            lista_libri_da_mostrare=libri_filtrati_genere
+
+        elif libri_filtrati_biblioteca_e_genere !=[]:
+            lista_libri_da_mostrare=libri_filtrati_biblioteca_e_genere
+
+        print(lista_libri_da_mostrare)
+
+        return lista_libri_da_mostrare
+
 
     def get_generi(self):
         """Restituisce la lista di tutti i generi."""
         # TODO
+        lista_generi=[]
+        for libro in self._libro_dao.get_libri_totali():
+            if libro.genere not in lista_generi:
+                lista_generi.append(libro.genere)
+        return lista_generi
 
     # --- BIBLIOTECHE ---
     def get_biblioteche(self):
         """ Restituisce la lista di tutte le biblioteche."""
         # TODO
+        lista_biblioteche=self._biblioteca_dao.get_biblioteche_totali()
+        return lista_biblioteche
+
+    def get_biblioteca_selezionata(self, nome_biblioteca):
+        biblioteca=nome_biblioteca
+        self._biblioteca_dao.get_libri_filtro_biblioteca(biblioteca)
+
+    def get_biblioteca_e_genere_selezionati(self, nome_biblioteca, nome_genere):
+        genere=nome_genere
+        biblioteca=nome_biblioteca
+        self._biblioteca_dao.get_libri_filtro_biblioteca_e_genere(biblioteca, genere)
+
+    def get_genere_selezionato(self, nome_genere):
+        genere=nome_genere
+        self._libro_dao.get_libri_filtro_genere(genere)
